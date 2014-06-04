@@ -1,20 +1,21 @@
 {
-    "is_att_admin": "role:att_staff_image_admin or role:admin",
+    "is_admin": "role:admin",
+    "is_att_admin": "role:att_staff_image_admin",
     "is_att_viewer": "role:att_staff_image_viewer",
     "is_ccp_admin": "role:ccp_tenant_image_admin",
     "is_ccp_viewer": "role:ccp_tenant_image_viewer",
     
-    "all_users": "rule:is_att_admin or rule:is_ccp_admin or rule:is_ccp_viewer or rule:is_att_viewer or role:admin",
-    "all_admins": "rule:is_att_admin or rule:is_ccp_admin or role:admin",
+    "all_users": "rule:is_att_admin or rule:is_ccp_admin or rule:is_ccp_viewer or rule:is_att_viewer or rule:is_admin",
+    "all_admins": "rule:is_att_admin or rule:is_ccp_admin or rule:is_admin",
 
-    "context_is_admin":  "rule:all_admins",
+    "context_is_admin":  "rule:all_admins or rule:is_admin",
 
-    "add_image": "rule:all_admin",
+    "add_image": "rule:all_admins",
     "delete_image": "rule:all_admins",
     "get_image": "rule:all_users",
     "get_images": "rule:all_users",
     "modify_image": "rule:all_admins",
-    "publicize_image": "rule:is_att_admin",
+    "publicize_image": "rule:is_att_admin or rule:is_admin",
     "copy_from": "rule:all_admins",
 
     "download_image": "rule:all_admins",
