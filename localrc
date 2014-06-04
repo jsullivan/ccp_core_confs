@@ -1,22 +1,19 @@
-# Sample ``local.conf`` for user-configurable variables in ``stack.sh``
+# Sample ``localrc`` for user-configurable variables in ``stack.sh``
 
 # NOTE: Copy this file to the root ``devstack`` directory for it to
 # work properly.
 
-# ``local.conf`` is a user-maintained setings file that is sourced from ``stackrc``.
+# ``localrc`` is a user-maintained setings file that is sourced from ``stackrc``.
 # This gives it the ability to override any variables set in ``stackrc``.
 # Also, most of the settings in ``stack.sh`` are written to only be set if no
-# value has already been set; this lets ``local.conf`` effectively override the
+# value has already been set; this lets ``localrc`` effectively override the
 # default values.
 
 # This is a collection of some of the settings we have found to be useful
 # in our DevStack development environments. Additional settings are described
-# in http://devstack.org/local.conf.html
+# in http://devstack.org/localrc.html
 # These should be considered as samples and are unsupported DevStack code.
 
-# The ``localrc`` section replaces the old ``localrc`` configuration file.
-# Note that if ``localrc`` is present it will be used in favor of this section.
-[[local|localrc]]
 
 # Minimal Contents
 # ----------------
@@ -25,10 +22,10 @@
 # there are a few minimal variables set:
 
 # If the ``*_PASSWORD`` variables are not set here you will be prompted to enter
-# values for them by ``stack.sh`` and they will be added to ``local.conf``.
-ADMIN_PASSWORD=password
-MYSQL_PASSWORD=password
-RABBIT_PASSWORD=password
+# values for them by ``stack.sh`` and they will be added to ``localrc``.
+ADMIN_PASSWORD=nomoresecrete
+MYSQL_PASSWORD=stackdb
+RABBIT_PASSWORD=stackqueue
 SERVICE_PASSWORD=$ADMIN_PASSWORD
 
 # ``HOST_IP`` should be set manually for best results if the NIC configuration
@@ -38,12 +35,8 @@ SERVICE_PASSWORD=$ADMIN_PASSWORD
 # the host. Setting it here also makes it available for ``openrc`` to include
 # when setting ``OS_AUTH_URL``.
 # ``HOST_IP`` is not set by default.
-HOST_IP=10.0.0.36
-FLOATING_RANGE=10.0.0.224/27
-FIXED_RANGE=10.0.0.0/24
-FIXED_NETWORK_SIZE=256
-FLAT_INTERFACE=eth0
-
+HOST_IP=108.244.164.121
+SERVICE_HOST=127.0.0.1
 
 # Logging
 # -------
@@ -79,7 +72,8 @@ LOGDAYS=2
 
 # Swift
 # -----
-enable_service s-proxy s-object s-container s-account
+
+enable_service swift s-proxy s-object s-container s-account
 # Swift is now used as the back-end for the S3-like object store. If Nova's
 # objectstore (``n-obj`` in ``ENABLED_SERVICES``) is enabled, it will NOT
 # run if Swift is enabled. Setting the hash value is required and you will
